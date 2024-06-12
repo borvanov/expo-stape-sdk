@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-stape-sdk-module": ["../src/index"],
+      "expo-stape-sdk-module/*": ["../src/*"]
+    }
+  }
+}
