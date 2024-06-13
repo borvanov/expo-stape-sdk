@@ -2,6 +2,10 @@ package expo.modules.stapesdkmodule
 
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import expo.modules.kotlin.Promise
+import io.stape.sgtm.Options;
+import io.stape.sgtm.Stape;
+import io.stape.sgtm.EventData;
 
 class ExpoStapeSdkModule : Module() {
   // Each module class must implement the definition function. The definition consists of components
@@ -13,34 +17,23 @@ class ExpoStapeSdkModule : Module() {
     // The module will be accessible from `requireNativeModule('ExpoStapeSdkModule')` in JavaScript.
     Name("ExpoStapeSdkModule")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
+    AsyncFunction("initialize") { domain: String, promise: Promise ->
+      try {
+        val stape = Stape.withOption(Options(domain))
+        promise.resolve("Initialized")
+      } catch (e: Exception) {
+        promise.reject("Error", e)
+      }
     }
 
     // Defines a JavaScript function that always returns a Promise and whose native code
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { value: String ->
-      // Send an event to JavaScript.
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
-    }
-
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
-    View(ExpoStapeSdkModuleView::class) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { view: ExpoStapeSdkModuleView, prop: String ->
-        println(prop)
+    AsyncFunction("sendStapeEvent") { name: String, payload: Map<String, String>, promise: Promise ->
+      try {
+        Stape.sendEvent(name, HashMap(payload));
+        promise.resolve("Event Sent");
+      } catch (Exception e) {
+        promise.reject("Error", e);
       }
     }
   }

@@ -38,6 +38,7 @@ PODS:
     - Yoga
   - ExpoStapeSdkModule (0.1.0):
     - ExpoModulesCore
+    - StapeSDK (~> 1.0.0)
   - FBLazyVector (0.74.2)
   - fmt (9.1.0)
   - glog (0.3.5)
@@ -1202,6 +1203,7 @@ PODS:
     - React-perflogger (= 0.74.2)
     - React-utils (= 0.74.2)
   - SocketRocket (0.7.0)
+  - StapeSDK (1.0.0)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1273,6 +1275,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - SocketRocket
+    - StapeSDK
 
 EXTERNAL SOURCES:
   boost:
@@ -1411,7 +1414,7 @@ SPEC CHECKSUMS:
   ExpoFont: 43b69559cef3d773db57c7ae7edd3cb0aa0dc610
   ExpoKeepAwake: 3b8815d9dd1d419ee474df004021c69fdd316d08
   ExpoModulesCore: d7b31b6d68b2ba815c46660d86018c789178fdb9
-  ExpoStapeSdkModule: c609c13e65ddfb9637e16ee605d34785d0e9a131
+  ExpoStapeSdkModule: 4dfcec5e5e46906855079f2348e0f37086d639ee
   FBLazyVector: 4bc164e5b5e6cfc288d2b5ff28643ea15fa1a589
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
@@ -1464,6 +1467,7 @@ SPEC CHECKSUMS:
   React-utils: 4476b7fcbbd95cfd002f3e778616155241d86e31
   ReactCommon: ecad995f26e0d1e24061f60f4e5d74782f003f12
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  StapeSDK: 0c38e8fcf6a15768ed3327d7a0db430ec0b214f4
   Yoga: 2f71ecf38d934aecb366e686278102a51679c308
 
 PODFILE CHECKSUM: 6cf598eb0aa88f6cf2d7e249cf81f2eee86a898c
