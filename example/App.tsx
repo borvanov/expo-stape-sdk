@@ -4,9 +4,9 @@ import { StyleSheet, View, Button } from "react-native";
 
 export default function App() {
   useEffect(() => {
-    ExpoStapeSdkModule.initialize("https://gtm.ollie.ai")
+    ExpoStapeSdkModule.initialize("gtm.stape.io")
       .then((result) => {
-        console.log("Initialized");
+        console.log(result);
       })
       .catch((error) => {
         console.log(error);
@@ -23,7 +23,6 @@ export default function App() {
           })
             .then((result) => {
               console.log(result);
-              console.log("Event sent");
             })
             .catch(() => {
               console.log("Event failed sent");

@@ -5,9 +5,11 @@ import expo.modules.kotlin.modules.ModuleDefinition
 import expo.modules.kotlin.Promise
 import io.stape.sgtm.Options;
 import io.stape.sgtm.Stape;
-import io.stape.sgtm.EventData;
+// import io.stape.sgtm.EventData;
 
 class ExpoStapeSdkModule : Module() {
+  private var stape: Stape? = null
+
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
   // See https://docs.expo.dev/modules/module-api for more details about available components.
@@ -19,10 +21,10 @@ class ExpoStapeSdkModule : Module() {
 
     AsyncFunction("initialize") { domain: String, promise: Promise ->
       try {
-        val stape = Stape.withOption(Options(domain))
+        stape = Stape.withOption(Options(domain, "mobile"))
         promise.resolve("Initialized")
       } catch (e: Exception) {
-        promise.reject("Error", e)
+        promise.reject("Error", e.message, e) 
       }
     }
 
@@ -30,10 +32,10 @@ class ExpoStapeSdkModule : Module() {
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
     AsyncFunction("sendStapeEvent") { name: String, payload: Map<String, String>, promise: Promise ->
       try {
-        Stape.sendEvent(name, HashMap(payload));
+        stape?.sendEvent(name, HashMap(payload));
         promise.resolve("Event Sent");
-      } catch (Exception e) {
-        promise.reject("Error", e);
+      } catch (e: Exception) {
+        promise.reject("Error", e.message, e)
       }
     }
   }

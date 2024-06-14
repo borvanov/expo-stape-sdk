@@ -12,7 +12,8 @@ public class ExpoStapeSdkModule: Module {
     Name("ExpoStapeSdkModule")
 
     AsyncFunction("initialize") { (domain: String, promise: Promise) in
-      guard let url = URL(string: domain) else {
+      let fullUrl = "https://\(domain)"
+      guard let url = URL(string: fullUrl) else {
         promise.reject("Invalid URL", "Provided domain is not a valid URL.")
         return
       }
